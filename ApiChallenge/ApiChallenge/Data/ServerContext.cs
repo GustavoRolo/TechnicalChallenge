@@ -11,5 +11,6 @@ namespace ApiChallenge.Data
         }
 
         public DbSet<Server> Servers { get; set; }
+        public DbSet<Video> Videos { get; set; }
     }
 }

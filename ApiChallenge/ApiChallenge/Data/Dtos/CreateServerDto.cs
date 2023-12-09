@@ -4,7 +4,7 @@ namespace ApiChallenge.Data.Dtos
 {
     public class CreateServerDto
     {
-        //Dataa Notation
+
         [Key]
         [Required(ErrorMessage = "O ID do servidor é obrigatório")]
         public Guid Id { get; set; }

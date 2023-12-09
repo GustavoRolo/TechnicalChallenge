@@ -25,10 +25,12 @@ namespace ApiChallenge.Migrations
 
                     b.Property<string>("IP")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Port")
@@ -37,6 +39,28 @@ namespace ApiChallenge.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Servers");
+                });
+
+            modelBuilder.Entity("ApiChallenge.Models.Video", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ServerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Videos");
                 });
 #pragma warning restore 612, 618
         }
