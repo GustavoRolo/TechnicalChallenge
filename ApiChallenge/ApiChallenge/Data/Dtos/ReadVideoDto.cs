@@ -10,6 +10,7 @@ namespace ApiChallenge.Data.Dtos
         public string Description { get; set; }
         public long Size { get; set; }
         public Guid ServerId { get; set; }
+        public string Path { get; set; }
 
        
     }

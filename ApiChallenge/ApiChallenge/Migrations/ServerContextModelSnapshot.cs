@@ -52,6 +52,10 @@ namespace ApiChallenge.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ServerId")
                         .HasColumnType("TEXT");
 

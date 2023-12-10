@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="3fa85f64-5717-4562-b3fc-2c963f66afa6\**" />
+    <Compile Remove="Uploads\**" />
+    <Content Remove="3fa85f64-5717-4562-b3fc-2c963f66afa6\**" />
+    <Content Remove="Uploads\**" />
+    <EmbeddedResource Remove="3fa85f64-5717-4562-b3fc-2c963f66afa6\**" />
+    <EmbeddedResource Remove="Uploads\**" />
+    <None Remove="3fa85f64-5717-4562-b3fc-2c963f66afa6\**" />
+    <None Remove="Uploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
