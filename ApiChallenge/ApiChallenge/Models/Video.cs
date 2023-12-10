@@ -12,7 +12,7 @@ namespace ApiChallenge.Models
         public string Description { get; set; }
         [Required(ErrorMessage = " O tamanho do video é obrigatória")]
         public long Size {  get; set; }
-
+        [Required(ErrorMessage = " O id do servidor é obrigatório")]
         public Guid ServerId { get; set; }
     }
 }

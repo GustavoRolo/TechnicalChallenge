@@ -21,31 +21,27 @@ namespace ApiChallenge.Controllers
         }
 
         [HttpPost]
-        public IActionResult createVideo(Guid idServer,[FromBody] CreateVideoDto videoDto)
+        public IActionResult createVideo(Guid idServer, [FromBody] CreateVideoDto videoDto)
         {
             var server = _context.Servers.FirstOrDefault(servers => servers.Id == idServer);
-            if (server == null)
-            {
-                return NotFound("Servidor não encontrado");
-            }
+            if (server == null) return NotFound();
             Video video = _mapper.Map<Video>(videoDto);
 
             video.ServerId = idServer;
-
+            Console.WriteLine(video.Id);
+            Console.WriteLine(video.ServerId);
             _context.Videos.Add(video);
             _context.SaveChanges();
-            //return Ok(video);
-            //return CreatedAtAction(nameof(getVideosId), new { idServer,id = video.Id },video);
+            //return CreatedAtAction(nameof(getVideosId),new { idVideo = video.Id },video);
             return getVideosId(idServer, video.Id);
         }
 
         [HttpGet]
-        public IActionResult getVideos(Guid idServer)
+        public IEnumerable<ReadVideoDto> getVideos(Guid idServer)
         {
             var video = _context.Videos.Where(videos => videos.ServerId == idServer).ToList();
-            if (video == null) return NotFound();
-            var videoDto = _mapper.Map<ReadVideoDto>(video);
-            return Ok(video);
+
+            return _mapper.Map<List<ReadVideoDto>>(_context.Videos.Where(videos => videos.ServerId == idServer).ToList());
         }
 
 
@@ -53,11 +49,26 @@ namespace ApiChallenge.Controllers
         public IActionResult getVideosId(Guid idServer, Guid idVideo)
         {
 
-            var video = _context.Videos.FirstOrDefault(videos => videos.ServerId == idServer && videos.Id == idVideo);
+            var video = _context.Videos.FirstOrDefault(video => video.ServerId == idServer && video.Id == idVideo);
             if (video == null) return NotFound();
 
             var videoDto = _mapper.Map<ReadVideoDto>(video);
             return Ok(videoDto);
         }
+
+
+        [HttpDelete("{idVideo}")]
+        public IActionResult deleteVideo(Guid idVideo, Guid idServer)
+        {
+            var server = _context.Servers.FirstOrDefault(server => server.Id == idServer);
+            if (server == null) return NotFound();
+            var video = _context.Videos.FirstOrDefault(videos => videos.Id == idVideo);
+            if (video == null) return NotFound();
+            _context.Remove(video);
+            _context.SaveChanges(true);
+            return NoContent();
+        }
+
+        
     }
 }

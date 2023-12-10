@@ -60,7 +60,23 @@ namespace ApiChallenge.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ServerId");
+
                     b.ToTable("Videos");
+                });
+
+            modelBuilder.Entity("ApiChallenge.Models.Video", b =>
+                {
+                    b.HasOne("ApiChallenge.Models.Server", null)
+                        .WithMany("Video")
+                        .HasForeignKey("ServerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ApiChallenge.Models.Server", b =>
+                {
+                    b.Navigation("Video");
                 });
 #pragma warning restore 612, 618
         }

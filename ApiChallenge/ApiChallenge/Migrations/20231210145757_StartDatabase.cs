@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApiChallenge.Migrations
 {
     /// <inheritdoc />
-    public partial class StartDataBase : Migration
+    public partial class StartDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,17 +37,28 @@ namespace ApiChallenge.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Videos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Videos_Servers_ServerId",
+                        column: x => x.ServerId,
+                        principalTable: "Servers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Videos_ServerId",
+                table: "Videos",
+                column: "ServerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Servers");
+                name: "Videos");
 
             migrationBuilder.DropTable(
-                name: "Videos");
+                name: "Servers");
         }
     }
 }

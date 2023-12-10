@@ -17,6 +17,8 @@ namespace ApiChallenge.Models
         [Required(ErrorMessage = " A porta do servidor é obrigatória")]
         [Range(80, 9999, ErrorMessage = "A porta deve estar entre 0 e 9999")]
         public int Port { get; set; }
+        public virtual ICollection<Video> Video { get; set; }
+
 
     }
 }
