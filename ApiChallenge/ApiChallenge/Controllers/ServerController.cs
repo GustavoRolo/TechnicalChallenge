@@ -5,6 +5,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Net;
+using System.Net.Sockets;
 
 namespace ApiChallenge.Controllers
 {
@@ -86,6 +88,33 @@ namespace ApiChallenge.Controllers
             return NoContent();
         }
 
+        [HttpGet("available/{id}​")]
+        public IActionResult GetServerAvailable(Guid id) 
+        {
+            var server = _context.Servers.FirstOrDefault(server => server.Id == id);
+            if (server == null) return NotFound();
+            var isAvailable = IsServerAvailable(server.IP, server.Port);
+            if (isAvailable) return Ok("O servidor está disponível."); // Retorna 200 OK se o servidor estiver disponível
+            else return StatusCode(503, "O servidor não está disponível."); // Retorna 503 Service Unavailable se o servidor não estiver disponível
+        }
 
+        [NonAction]
+        public bool IsServerAvailable(string ipAddress, int port) 
+        {
+            try
+            {
+                using (TcpClient client = new TcpClient())
+                {
+                    // Tente conectar ao servidor
+                    client.Connect(ipAddress, port);
+                    return true;
+                }
+            }
+            catch (SocketException)
+            {
+                // Tratar exceções, se necessário
+                return false;
+            }
+        }
     }
 }

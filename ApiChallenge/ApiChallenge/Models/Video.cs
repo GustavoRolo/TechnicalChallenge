@@ -16,5 +16,7 @@ namespace ApiChallenge.Models
         public long Size {  get; set; }
         [Required(ErrorMessage = " O id do servidor é obrigatório")]
         public Guid ServerId { get; set; }
+        [Required]
+        public DateTime DateTime { get; set; } = DateTime.Now;
     }
 }
