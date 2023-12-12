@@ -17,57 +17,82 @@ namespace ApiChallenge.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
-            modelBuilder.Entity("ApiChallenge.Models.Server", b =>
+            modelBuilder.Entity("ApiChallenge.Models.Recycler", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("IP")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Port")
+                    b.Property<int>("days")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("run")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Recyclers");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("0b83db25-299e-46ed-913e-1dde2cf4cc34"),
+                            days = 0,
+                            run = false
+                        });
+                });
+
+            modelBuilder.Entity("ApiChallenge.Models.Server", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ip")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("port")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
 
                     b.ToTable("Servers");
                 });
 
             modelBuilder.Entity("ApiChallenge.Models.Video", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("dateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Path")
+                    b.Property<string>("path")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ServerId")
+                    b.Property<Guid>("serverId")
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Size")
+                    b.Property<long>("size")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
-                    b.HasIndex("ServerId");
+                    b.HasIndex("serverId");
 
                     b.ToTable("Videos");
                 });
@@ -76,7 +101,7 @@ namespace ApiChallenge.Migrations
                 {
                     b.HasOne("ApiChallenge.Models.Server", null)
                         .WithMany("Video")
-                        .HasForeignKey("ServerId")
+                        .HasForeignKey("serverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

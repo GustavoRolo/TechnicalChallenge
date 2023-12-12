@@ -14,7 +14,7 @@ namespace ApiChallenge.Profiles
             CreateMap<Video, ReadVideoDto>();
             CreateMap<Video, UpdateVideoDto>();
             CreateMap<Video, List<Video>>();
-            CreateMap<List<Video>, ReadVideoDto >();
+            CreateMap<List<Video>, ReadVideoDto>();
         }
     }
 }

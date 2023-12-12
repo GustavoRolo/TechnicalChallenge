@@ -7,16 +7,16 @@ namespace ApiChallenge.Models
 
         [Key]
         [Required(ErrorMessage = "O ID do servidor é obrigatório")]
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
         [Required(ErrorMessage = " O nome do servidor é obrigatório")]
         [StringLength(50, ErrorMessage = "O tamanho do nome não pode exceder 50 caracteres.")]
-        public string Name { get; set; }
+        public string name { get; set; }
         [Required(ErrorMessage = " O IP do servidor é obrigatório")]
         [StringLength(50, ErrorMessage = "O tamanho do ip não pode exceder 50 caracteres.")]
-        public string IP { get; set; }
+        public string ip { get; set; }
         [Required(ErrorMessage = " A porta do servidor é obrigatória")]
         [Range(80, 9999, ErrorMessage = "A porta deve estar entre 0 e 9999")]
-        public int Port { get; set; }
+        public int port { get; set; }
         public virtual ICollection<Video> Video { get; set; }
 
 

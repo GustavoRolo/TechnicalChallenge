@@ -4,8 +4,6 @@ using ApiChallenge.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System.Net;
 using System.Net.Sockets;
 
 namespace ApiChallenge.Controllers
@@ -24,64 +22,64 @@ namespace ApiChallenge.Controllers
         }
 
         [HttpPost]
-        public IActionResult createServer([FromBody] CreateServerDto serverDto)
+        public IActionResult CreateServer([FromBody] CreateServerDto serverDto)
         {
             Server server = _mapper.Map<Server>(serverDto);
             _context.Servers.Add(server);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(getServersId), new { id = server.Id }, server);
+            return CreatedAtAction(nameof(GetServersId), new { id = server.id }, server);
         }
 
         [HttpGet]
-        public IEnumerable<ReadServerDto> getServers([FromQuery] int skip = 0, [FromQuery] int take = 50)
+        public IEnumerable<ReadServerDto> GetServers([FromQuery] int skip = 0, [FromQuery] int take = 50)
         {
             return _mapper.Map<List<ReadServerDto>>(_context.Servers.Skip(skip).Take(take));
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult getServersId(Guid id)
+        public IActionResult GetServersId(Guid id)
         {
 
-            var server = _context.Servers.FirstOrDefault(servers => servers.Id == id);
+            var server = _context.Servers.FirstOrDefault(servers => servers.id == id);
             if (server == null) return NotFound();
-            var serverDto = _mapper.Map<ReadServerDto>(server); 
+            var serverDto = _mapper.Map<ReadServerDto>(server);
             return Ok(serverDto);
         }
 
         [HttpPut("{id}")]
-        public IActionResult updateServer(Guid id, [FromBody] UpdateServerDto serverDto) 
-        { 
-            var server =  _context.Servers.FirstOrDefault(server => server.Id == id);
+        public IActionResult UpdateServer(Guid id, [FromBody] UpdateServerDto serverDto)
+        {
+            var server = _context.Servers.FirstOrDefault(server => server.id == id);
             if (server == null) return NotFound();
             _mapper.Map(serverDto, server);
             _context.SaveChanges();
-            return NoContent();
+            return GetServersId(id);
         }
 
         [HttpPatch("{id}")]
-        public IActionResult updateServerPatch(Guid id, JsonPatchDocument<UpdateServerDto> patch) 
+        public IActionResult UpdateServerPatch(Guid id, JsonPatchDocument<UpdateServerDto> patch)
         {
 
-            var server = _context.Servers.FirstOrDefault(server => server.Id == id);
+            var server = _context.Servers.FirstOrDefault(server => server.id == id);
             if (server == null) return NotFound();
 
-            var serverupdate = _mapper.Map<UpdateServerDto>(server);
-            patch.ApplyTo(serverupdate, ModelState);
+            var serverUpdate = _mapper.Map<UpdateServerDto>(server);
+            patch.ApplyTo(serverUpdate, ModelState);
 
-            if (!TryValidateModel(serverupdate)) 
+            if (!TryValidateModel(serverUpdate))
             {
                 return ValidationProblem(ModelState);
             }
-            _mapper.Map(serverupdate, server);
+            _mapper.Map(serverUpdate, server);
             _context.SaveChanges();
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult deleteServer(Guid id) 
+        public IActionResult DeleteServer(Guid id)
         {
-            var server = _context.Servers.FirstOrDefault(server => server.Id == id);
+            var server = _context.Servers.FirstOrDefault(server => server.id == id);
             if (server == null) return NotFound();
             _context.Remove(server);
             _context.SaveChanges(true);
@@ -89,17 +87,17 @@ namespace ApiChallenge.Controllers
         }
 
         [HttpGet("available/{id}​")]
-        public IActionResult GetServerAvailable(Guid id) 
+        public IActionResult GetServerAvailable(Guid id)
         {
-            var server = _context.Servers.FirstOrDefault(server => server.Id == id);
+            var server = _context.Servers.FirstOrDefault(server => server.id == id);
             if (server == null) return NotFound();
-            var isAvailable = IsServerAvailable(server.IP, server.Port);
+            var isAvailable = IsServerAvailable(server.ip, server.port);
             if (isAvailable) return Ok("O servidor está disponível."); // Retorna 200 OK se o servidor estiver disponível
             else return StatusCode(503, "O servidor não está disponível."); // Retorna 503 Service Unavailable se o servidor não estiver disponível
         }
 
         [NonAction]
-        public bool IsServerAvailable(string ipAddress, int port) 
+        public bool IsServerAvailable(string ipAddress, int port)
         {
             try
             {
