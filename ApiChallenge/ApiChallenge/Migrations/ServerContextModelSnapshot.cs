@@ -36,7 +36,7 @@ namespace ApiChallenge.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("0b83db25-299e-46ed-913e-1dde2cf4cc34"),
+                            id = new Guid("bbc5a357-95c8-4712-ab96-5215c4a45f74"),
                             days = 0,
                             run = false
                         });

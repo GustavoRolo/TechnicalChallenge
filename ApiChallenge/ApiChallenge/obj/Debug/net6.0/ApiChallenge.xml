@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiChallenge</name>
+    </assembly>
+    <members>
+        <member name="M:ApiChallenge.Controllers.RecyclerController.GetRecyclerDays(System.Int32)">
+            <summary>
+            Altera a quantidade de dias em que a rotina de limpeza é acionada [ROTINA NÃO IMPLEMENTADA]
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.RecyclerController.GetRecyclerStatus">
+            <summary>
+            Retorna a configuração da rotina de limpeza [ROTINA NÃO IMPLEMENTADA]
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.CreateServer(ApiChallenge.Data.Dtos.CreateServerDto)">
+            <summary>
+            Cria um novo servidor
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.GetServers(System.Int32,System.Int32)">
+            <summary>
+            Retornar uma lista de servidores
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.GetServersId(System.Guid)">
+            <summary>
+            Retorna um servidor específico pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.UpdateServer(System.Guid,ApiChallenge.Data.Dtos.UpdateServerDto)">
+            <summary>
+            Atualiza um servidor pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.UpdateServerPatch(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ApiChallenge.Data.Dtos.UpdateServerDto})">
+            <summary>
+            Atualiza parcialmente um servidor pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.DeleteServer(System.Guid)">
+            <summary>
+            Deleta um servidor pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.ServerController.GetServerAvailable(System.Guid)">
+            <summary>
+             Verifica a disponibilidade de um servidor pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.VideoController.UploadVideo(Microsoft.AspNetCore.Http.IFormFile,System.Guid,ApiChallenge.Data.Dtos.CreateVideoDto)">
+            <summary>
+             Cria e armazena um vídeo no sistema de arquivos.
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.VideoController.GetVideos(System.Guid)">
+            <summary>
+             Retorna uma lista das informações de cadastro dos vídeos vinculados a um servidor
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.VideoController.GetVideosId(System.Guid,System.Guid)">
+            <summary>
+             Retorna um vídeo pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.VideoController.DeleteVideo(System.Guid,System.Guid)">
+            <summary>
+             Deleta um vídeo pelo ID
+            </summary>
+        </member>
+        <member name="M:ApiChallenge.Controllers.VideoController.GetBinatyVideo(System.Guid,System.Guid)">
+            <summary>
+            Retorna o arquivo binário do vídeo para download
+            </summary>
+        </member>
+        <member name="T:ApiChallenge.Migrations.Inicial">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiChallenge.Migrations.Inicial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiChallenge.Migrations.Inicial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiChallenge.Migrations.Inicial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

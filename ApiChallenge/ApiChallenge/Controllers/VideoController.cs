@@ -23,7 +23,10 @@ namespace ApiChallenge.Controllers
             _environment = environment;
             fileManager = new FileManager(_environment);
         }
-
+        /// <summary>
+        ///  Cria e armazena um vídeo no sistema de arquivos.
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [HttpPost]
         [DisableRequestSizeLimit]
         public async Task<IActionResult> UploadVideo(IFormFile file, Guid idServer, [FromForm] CreateVideoDto videoDto)
@@ -46,6 +49,10 @@ namespace ApiChallenge.Controllers
 
         }
 
+        /// <summary>
+        ///  Retorna uma lista das informações de cadastro dos vídeos vinculados a um servidor
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public IEnumerable<ReadVideoDto> GetVideos(Guid idServer)
         {
@@ -54,7 +61,10 @@ namespace ApiChallenge.Controllers
             return _mapper.Map<List<ReadVideoDto>>(_context.Videos.Where(videos => videos.serverId == idServer).ToList());
         }
 
-
+        /// <summary>
+        ///  Retorna um vídeo pelo ID
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{idVideo}")]
         public IActionResult GetVideosId(Guid idServer, Guid idVideo)
         {
@@ -66,7 +76,10 @@ namespace ApiChallenge.Controllers
             return Ok(videoDto);
         }
 
-
+        /// <summary>
+        ///  Deleta um vídeo pelo ID
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("{idVideo}")]
         public IActionResult DeleteVideo(Guid idVideo, Guid idServer)
         {
@@ -79,7 +92,10 @@ namespace ApiChallenge.Controllers
             fileManager.DeleteFile(video.path);
             return NoContent();
         }
-
+        /// <summary>
+        /// Retorna o arquivo binário do vídeo para download
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{idVideo}/binary​")]
         public IActionResult GetBinatyVideo(Guid idVideo, Guid idServer)
         {

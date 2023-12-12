@@ -84,3 +84,5 @@ C:\Users\Gustavo\Desktop\TechnicalChallenge\ApiChallenge\ApiChallenge\bin\Debug\
 C:\Users\Gustavo\Desktop\TechnicalChallenge\ApiChallenge\ApiChallenge\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Gustavo\Desktop\TechnicalChallenge\ApiChallenge\ApiChallenge\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Gustavo\Desktop\TechnicalChallenge\ApiChallenge\ApiChallenge\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Gustavo\Desktop\TechnicalChallenge\ApiChallenge\ApiChallenge\bin\Debug\net6.0\ApiChallenge.xml
+C:\Users\Gustavo\Desktop\TechnicalChallenge\ApiChallenge\ApiChallenge\obj\Debug\net6.0\ApiChallenge.xml
